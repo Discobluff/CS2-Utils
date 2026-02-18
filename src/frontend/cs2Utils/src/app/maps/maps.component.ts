@@ -1,6 +1,11 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
+interface MapInfo {
+  name: string;
+  id: string;
+}
+
 @Component({
   selector: 'app-maps',
   standalone: true,
@@ -9,6 +14,10 @@ import { Component } from '@angular/core';
   styleUrl: './maps.component.css'
 })
 export class MapsComponent {
-  maps: String[] = ["Dust2", "Mirage"];
+  maps: MapInfo[] = [
+    { name: "DUST 2", id: "dust2" },
+    { name: "MIRAGE", id: "mirage" },
+    { name: "INFERNO", id: "inferno" },
+  ];
 
 }
