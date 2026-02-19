@@ -1,0 +1,31 @@
+
+.list-selector-title {
+    font-weight: bold;
+}
+
+.list-element {
+    margin: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    font-weight: bold;
+    display: flex;
+    padding: 0.5rem;
+    width: var(--list_element_size);
+}
+
+.list-element:hover {
+    cursor: pointer;
+    /* transform: scale(1.15); */
+    background-color: lightgray;
+}
+
+
+.list-element-selected {
+    background-color: lightgray;
+}
+
+.list-element-icon {
+    width: 30%;
+    padding-right: 0.5rem;
+
+}

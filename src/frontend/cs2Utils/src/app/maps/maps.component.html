@@ -1,6 +1,6 @@
 <h1><b>Select a map</b></h1>
 <div class="maps">
-    <div class="map_card" *ngFor="let map of maps" id={{map.id}}>
+    <div class="map_card" *ngFor="let map of maps" [id]="map.id" (click)="goToMap(map.id)">
         <img class="map_image" src="assets/{{map.id}}.png" alt="Missing image for this map">
         <p class="map_name">{{map.name}}</p>
     </div>
