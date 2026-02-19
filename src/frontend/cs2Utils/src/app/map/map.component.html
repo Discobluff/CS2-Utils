@@ -1,11 +1,22 @@
+<button mat-button routerLink="/maps">
+  <mat-icon>arrow_back</mat-icon>
+  Return to the maps list
+</button>
 <div class="list-selector">
     <h2 class="list-selector-title">Teams</h2>
     <div class="list">
         <div class="list-element" *ngFor="let team of teams" [id]="team.id" [class.list-element-selected]="team.id === teamSelected" (click)="pickTeam(team.id)">
             <img src="assets/teams/{{team.id}}.png" alt="Team icon" class="list-element-icon">
-            <p>{{team.name}}</p>
+            <p class="list-element-text">{{team.name}}</p>
         </div>
-
     </div>
-
+</div>
+<div class="list-selector">
+    <h2 class="list-selector-title">Stuffs</h2>
+    <div class="list">
+        <div class="list-element" *ngFor="let stuff of stuffs" [id]="stuff.id" [class.list-element-selected]="stuff.id === stuffSelected" (click)="pickStuff(stuff.id)">
+            <img src="assets/stuffs/{{stuff.id}}.png" alt="Stuff icon" class="list-element-icon">
+            <p class="list-element-text">{{stuff.name}}</p>
+        </div>
+    </div>
 </div>

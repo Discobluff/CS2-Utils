@@ -8,7 +8,7 @@ export interface Team {
   id: string;
 }
 
-export enum Stuff {
-    Smoke = "smoke",
-    Flash = "flash",
+export interface Stuff {
+  name: string;
+  id: string;
 }

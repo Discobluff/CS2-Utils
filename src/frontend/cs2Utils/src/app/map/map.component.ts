@@ -2,12 +2,14 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Team, Stuff } from '../../lib/map';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, MatIconModule, MatButtonModule, RouterLink],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
@@ -15,14 +17,21 @@ export class MapComponent {
 
   mapSelected: string | null = null;
   teamSelected: string | null = null;
-  stuffSelected: Stuff | null = null;
+  stuffSelected: string | null = null;
 
   teams: Team[] = [
     { name: "Any", id: "any" },
     { name: "T", id: "t" },
     { name: "CT", id: "ct" },
 
-  ]
+  ];
+
+  stuffs: Stuff[] = [
+    { name: "Smoke", id: "smoke"},
+    { name: "Molotov", id: "molotov"},
+    { name: "Flash", id: "flash"},
+    { name: "HE", id: "he"},
+  ];
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -37,5 +46,9 @@ export class MapComponent {
 
   pickTeam(teamId: string) {
     this.router.navigate(['/maps/' + this.mapSelected + '/' + teamId + '/' + this.stuffSelected])
+  }
+
+  pickStuff(stuffId: string) {
+    this.router.navigate(['/maps/' + this.mapSelected + '/' + this.teamSelected + '/' + stuffId])
   }
 }

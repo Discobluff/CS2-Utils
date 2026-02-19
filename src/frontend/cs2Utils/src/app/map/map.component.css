@@ -15,7 +15,6 @@
 
 .list-element:hover {
     cursor: pointer;
-    /* transform: scale(1.15); */
     background-color: lightgray;
 }
 
@@ -24,8 +23,14 @@
     background-color: lightgray;
 }
 
+.list-element-text {
+    padding-left: 0.5rem;
+}
+
 .list-element-icon {
     width: 30%;
-    padding-right: 0.5rem;
+    border-radius: 100%;
+
+    border: 0.025rem solid;
 
 }
