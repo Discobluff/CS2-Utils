@@ -7,3 +7,32 @@ CREATE TABLE map.map (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+CREATE TABLE map.stuff (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255),
+    asset_name VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE map.team (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255),
+    asset_name VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE map.lineup (
+    id VARCHAR(255) PRIMARY KEY,
+    map_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (map_id) REFERENCES map.map(id),
+    stuff_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (stuff_id) REFERENCES map.stuff(id),
+    team_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (team_id) REFERENCES map.team(id),
+    video_link VARCHAR(255),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);

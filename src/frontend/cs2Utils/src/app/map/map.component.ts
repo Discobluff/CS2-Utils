@@ -5,11 +5,12 @@ import { Team, Stuff } from '../../lib/map';
 import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { LineupDialogComponent } from '../lineup-dialog/lineup-dialog.component';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [NgFor, MatIconModule, MatButtonModule, RouterLink],
+  imports: [NgFor, MatIconModule, MatButtonModule, RouterLink, LineupDialogComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
@@ -50,5 +51,12 @@ export class MapComponent {
 
   pickStuff(stuffId: string) {
     this.router.navigate(['/maps/' + this.mapSelected + '/' + this.teamSelected + '/' + stuffId])
+  }
+
+  dialogOpen = false;
+
+  onCreated(value: string) {
+    console.log('Created:', value);
+    this.dialogOpen = false;
   }
 }

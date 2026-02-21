@@ -1,0 +1,20 @@
+@if (isOpen) {
+  <div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
+    <div class="dialog">
+      <h2>Add lineup</h2>
+      <!-- <input
+        type="text"
+        [(ngModel)]="inputValue"
+        placeholder="Enter a name..."
+        (keydown.enter)="handleCreate()"
+      /> -->
+    <select [(ngModel)]="stuffSelected">
+        <option *ngFor="let stuff of stuffs" [value]="stuff.id">{{stuff.name}}</option>
+    </select>
+      <div class="dialog-actions">
+        <button class="btn btn-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="btn btn-create" (click)="handleCreate()">Add</button>
+      </div>
+    </div>
+  </div>
+}
