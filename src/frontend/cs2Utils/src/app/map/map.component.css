@@ -34,12 +34,9 @@
 
 .flex-container {
     display: flex;
-    gap: 16px;
+    gap: 1rem;
+    margin-left: 1rem;
 }
-
-/* .flex-container .col {
-    flex: 1;
-} */
 
 .layout {
     width: 60%;

@@ -15,12 +15,6 @@ import { environment } from '../../environements/environments';
 export class MapsComponent {
   constructor(private router: Router, private http: HttpClient) {}
 
-  // maps: MapInfo[] = [
-  //   { name: "DUST 2", id: "dust2" },
-  //   { name: "MIRAGE", id: "mirage" },
-  //   { name: "INFERNO", id: "inferno" },
-  // ];
-
   maps: MapInfo[] = [];
 
   ngOnInit() {

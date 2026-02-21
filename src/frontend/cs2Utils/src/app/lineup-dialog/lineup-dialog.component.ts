@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Stuff } from '../../lib/map';
 
 @Component({
   selector: 'app-dialog',
@@ -10,10 +11,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './lineup-dialog.component.css'
 })
 export class LineupDialogComponent {
-  @Input() isOpen = false;
-  @Input() stuffs = [
-    {name: "Smoke", id: "smoke"},
-  ]
+  @Input() isOpen: boolean = false;
+  @Input() stuffs: Stuff[] = [];
   @Output() cancelled = new EventEmitter<void>();
   @Output() created = new EventEmitter<string>();
 
