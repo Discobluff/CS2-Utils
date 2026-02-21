@@ -21,7 +21,7 @@ public class MapService {
         return mapRepo.findAll();
     }
 
-    public Map getMapById(Integer id){
+    public Map getMapById(String id){
         Optional<Map> optionalMap = mapRepo.findById(id);
         if(optionalMap.isPresent()){
             return optionalMap.get();
@@ -50,7 +50,7 @@ public class MapService {
         return updatedMap;
     }
 
-    public void deleteMapById (Integer id) {
+    public void deleteMapById (String id) {
         mapRepo.deleteById(id);
     }
 

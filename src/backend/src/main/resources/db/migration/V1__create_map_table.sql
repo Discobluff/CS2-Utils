@@ -1,7 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS map;
 
 CREATE TABLE map.map (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(255) PRIMARY KEY,
     name VARCHAR(255),
     asset_name VARCHAR(255),
     created_at TIMESTAMP,

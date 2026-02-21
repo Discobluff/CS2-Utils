@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Map {
 
     @Id
-    private Integer id;
+    private String id;
     private String name;
     private String assetName;
     private LocalDateTime createdAt;

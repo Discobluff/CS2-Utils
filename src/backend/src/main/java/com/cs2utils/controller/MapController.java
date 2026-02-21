@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/maps/v1")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/v1/maps")
 @RequiredArgsConstructor
 @Validated
 public class MapController {
@@ -23,7 +24,7 @@ public class MapController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map> getMapById(@PathVariable Integer id)
+    public ResponseEntity<Map> getMapById(@PathVariable String id)
     {
         return ResponseEntity.ok().body(mapService.getMapById(id));
     }
@@ -41,7 +42,7 @@ public class MapController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteMapById(@PathVariable Integer id)
+    public ResponseEntity<String> deleteMapById(@PathVariable String id)
     {
         mapService.deleteMapById(id);
         return ResponseEntity.ok().body("Deleted map successfully");
