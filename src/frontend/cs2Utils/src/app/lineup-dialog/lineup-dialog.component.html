@@ -1,20 +1,34 @@
 @if (isOpen) {
-  <div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
-    <div class="dialog">
-      <h2>Add lineup</h2>
-      <!-- <input
-        type="text"
-        [(ngModel)]="inputValue"
-        placeholder="Enter a name..."
-        (keydown.enter)="handleCreate()"
-      /> -->
+<div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
+  <div class="dialog">
+    <h2>Add lineup</h2>
+    <p>Stuff type</p>
     <select [(ngModel)]="stuffSelected">
-        <option *ngFor="let stuff of stuffs" [value]="stuff.id">{{stuff.name}}</option>
+      <option *ngFor="let stuff of stuffs" [value]="stuff.id">{{stuff.name}}</option>
     </select>
-      <div class="dialog-actions">
-        <button class="btn btn-cancel" (click)="handleCancel()">Cancel</button>
-        <button class="btn btn-create" (click)="handleCreate()">Add</button>
-      </div>
+    <p>Click</p>
+    <select [(ngModel)]="click">
+      <option value="left_click">Left click</option>
+      <option value="middle_click">Middle click</option>
+      <option value="right_click">Right click</option>
+    </select>
+    <p>Position</p>
+    <select [(ngModel)]="position">
+      <option value="stand">Stand</option>
+      <option value="crouch">Crouch</option>
+    </select>
+    <p>Jump</p>
+    <input type="checkbox" [(ngModel)]="jump" />
+    <p>Movement</p>
+    <select [(ngModel)]="movement">
+      <option value="stand">Stand</option>
+      <option value="shift">Shift</option>
+      <option value="walk">Walk</option>
+    </select>
+    <div class="dialog-actions">
+      <button class="btn btn-cancel" (click)="handleCancel()">Cancel</button>
+      <button class="btn btn-create" (click)="handleCreate()">Add</button>
     </div>
   </div>
+</div>
 }

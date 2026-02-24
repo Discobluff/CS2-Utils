@@ -17,6 +17,10 @@ export class LineupDialogComponent {
   @Output() created = new EventEmitter<string>();
 
   stuffSelected = '';
+  click = '';
+  position = '';
+  jump = false;
+  movement = '';
 
   handleCreate() {
     if (!this.stuffSelected.trim()) return;
