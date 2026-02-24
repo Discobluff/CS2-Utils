@@ -3,24 +3,24 @@
   <div class="dialog">
     <h2>Add lineup</h2>
     <p>Stuff type</p>
-    <select [(ngModel)]="stuffSelected">
+    <select [(ngModel)]="newLineup.stuff_id">
       <option *ngFor="let stuff of stuffs" [value]="stuff.id">{{stuff.name}}</option>
     </select>
     <p>Click</p>
-    <select [(ngModel)]="click">
+    <select [(ngModel)]="newLineup.click_type">
       <option value="left_click">Left click</option>
       <option value="middle_click">Middle click</option>
       <option value="right_click">Right click</option>
     </select>
     <p>Position</p>
-    <select [(ngModel)]="position">
+    <select [(ngModel)]="newLineup.position">
       <option value="stand">Stand</option>
       <option value="crouch">Crouch</option>
     </select>
     <p>Jump</p>
-    <input type="checkbox" [(ngModel)]="jump" />
+    <input type="checkbox" [(ngModel)]="newLineup.jump" />
     <p>Movement</p>
-    <select [(ngModel)]="movement">
+    <select [(ngModel)]="newLineup.movement">
       <option value="stand">Stand</option>
       <option value="shift">Shift</option>
       <option value="walk">Walk</option>

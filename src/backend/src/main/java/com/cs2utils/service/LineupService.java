@@ -33,6 +33,7 @@ public class LineupService {
     public Lineup saveLineup (Lineup lineup){
         lineup.setCreatedAt(LocalDateTime.now());
         lineup.setUpdatedAt(LocalDateTime.now());
+        // lineup.setId(564);
         Lineup savedLineup = lineupRepo.save(lineup);
 
         log.info("Lineup with id: {} saved successfully", lineup.getId());

@@ -3,6 +3,8 @@ package com.cs2utils.controller;
 import com.cs2utils.entity.Lineup;
 import com.cs2utils.service.LineupService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequestMapping("/v1/lineups")
 @RequiredArgsConstructor
 @Validated
+@Slf4j
 public class LineupController {
 
     private final LineupService lineupService;

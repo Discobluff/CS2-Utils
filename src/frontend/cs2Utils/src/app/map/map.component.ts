@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Team, Stuff } from '../../lib/map';
+import { Team, Stuff, Lineup } from '../../lib/lib';
 import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,19 +18,32 @@ import { environment } from '../../environements/environments';
 })
 export class MapComponent {
 
-  mapSelected: string | null = null;
-  teamSelected: string | null = null;
+  mapSelected: string = "";
+  teamSelected: string = "";
   stuffSelected: string | null = null;
 
   teams: Team[] = [];
+  lineups: Lineup[] = [];
   
   getTeams() {
     this.http.get<[]>(`${environment.apiUrl}/teams`).subscribe({
       next: (data) => {
         this.teams = data;
+        this.teams.push({id: "any", name: "Any", asset_name: "any"})
       },
       error: (error) => {
         console.error('Error fetching teams:', error);
+      }
+    });
+  }
+
+  getLineups() {
+      this.http.get<[]>(`${environment.apiUrl}/lineups`).subscribe({
+      next: (data) => {
+        this.lineups = data;
+      },
+      error: (error) => {
+        console.error('Error fetching lineups:', error);
       }
     });
   }
@@ -57,6 +70,8 @@ export class MapComponent {
       this.stuffSelected = params['stuff'];
       this.getTeams();
       this.getStuffs();
+      this.getLineups();
+      console.log(this.lineups);
     });
   }
 
@@ -68,10 +83,23 @@ export class MapComponent {
     this.router.navigate(['/maps/' + this.mapSelected + '/' + this.teamSelected + '/' + stuffId])
   }
 
-  dialogOpen = false;
-
-  onCreated(value: string) {
-    console.log('Created:', value);
+  addNewLineup(newLineup: Lineup) {
+    newLineup.map_id = this.mapSelected;
+    newLineup.team_id = this.teamSelected;
+    newLineup.coords_x = 50;
+    newLineup.coords_y = 50;
     this.dialogOpen = false;
+    console.log(newLineup); // before the http call
+    console.log(JSON.stringify(newLineup)); // check serialization
+    this.http.post<[]>(`${environment.apiUrl}/lineups`, newLineup).subscribe({
+    next: (data) => {
+      this.getLineups();
+    },
+    error: (error) => {
+      console.error('Error creating lineup:', error);
+    }
+  });
   }
+
+  dialogOpen = false;
 }

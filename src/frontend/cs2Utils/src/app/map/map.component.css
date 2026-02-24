@@ -38,10 +38,19 @@
     margin-left: 1rem;
 }
 
+.stuff-containr {
+    position: relative;
+}
+
 .layout {
-    width: 60%;
+    width: 50%;
+    /* position: absolute; */
 }
 
 .layout:hover {
     cursor: pointer;
+}
+
+.stuff-icon {
+    position: absolute;
 }

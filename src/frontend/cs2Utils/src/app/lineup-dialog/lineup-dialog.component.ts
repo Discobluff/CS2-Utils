@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Stuff } from '../../lib/map';
+import { Lineup, Stuff } from '../../lib/lib';
 
 @Component({
   selector: 'app-dialog',
@@ -14,22 +14,21 @@ export class LineupDialogComponent {
   @Input() isOpen: boolean = false;
   @Input() stuffs: Stuff[] = [];
   @Output() cancelled = new EventEmitter<void>();
-  @Output() created = new EventEmitter<string>();
+  @Output() created = new EventEmitter<Lineup>();
 
-  stuffSelected = '';
-  click = '';
-  position = '';
-  jump = false;
-  movement = '';
+  newLineup: Lineup = this.createNewLineup();
+
+  createNewLineup(): Lineup {
+    return {id:42,map_id:'',  stuff_id: '', team_id: '', video_link: '', jump: false, coords_x: 0, coords_y: 0, click_type: 'left_click', position: 'stand', movement: 'stand'};
+  }
 
   handleCreate() {
-    if (!this.stuffSelected.trim()) return;
-    this.created.emit(this.stuffSelected.trim());
-    this.stuffSelected = '';
+    this.created.emit(this.newLineup);
+    this.newLineup = this.createNewLineup();
   }
 
   handleCancel() {
-    this.stuffSelected = '';
+    this.newLineup = this.createNewLineup();
     this.cancelled.emit();
   }
 

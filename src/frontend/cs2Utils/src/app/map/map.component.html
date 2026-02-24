@@ -2,7 +2,7 @@
   [isOpen]="dialogOpen"
   [stuffs]="stuffs"
   (cancelled)="dialogOpen = false"
-  (created)="onCreated($event)"
+  (created)="addNewLineup($event)"
 />
 
 <button mat-button routerLink="/maps">
@@ -32,7 +32,8 @@
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col stuff-container">
         <img class="layout" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="dialogOpen = true">
+        <img class="stuff-icon" src="smoke_t.png" *ngFor="let lineup of lineups">
     </div>
 </div>
