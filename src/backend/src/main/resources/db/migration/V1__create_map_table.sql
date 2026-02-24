@@ -25,7 +25,7 @@ CREATE TABLE map.team (
 );
 
 CREATE TABLE map.lineup (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     map_id VARCHAR(255) NOT NULL,
     FOREIGN KEY (map_id) REFERENCES map.map(id),
     stuff_id VARCHAR(255) NOT NULL,

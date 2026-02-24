@@ -17,7 +17,6 @@ export interface Stuff {
 }
 
 export interface Lineup {
-  id:Number;
   map_id: string;
   stuff_id: string;
   team_id: string;

@@ -89,8 +89,6 @@ export class MapComponent {
     newLineup.coords_x = 50;
     newLineup.coords_y = 50;
     this.dialogOpen = false;
-    console.log(newLineup); // before the http call
-    console.log(JSON.stringify(newLineup)); // check serialization
     this.http.post<[]>(`${environment.apiUrl}/lineups`, newLineup).subscribe({
     next: (data) => {
       this.getLineups();

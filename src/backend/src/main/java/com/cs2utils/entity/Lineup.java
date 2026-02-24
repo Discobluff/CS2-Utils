@@ -1,8 +1,8 @@
 package com.cs2utils.entity;
 
 import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 public class Lineup {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String map_id;
     private String stuff_id;
     private String team_id;
