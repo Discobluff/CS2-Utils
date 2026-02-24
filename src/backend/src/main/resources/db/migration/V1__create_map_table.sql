@@ -25,7 +25,7 @@ CREATE TABLE map.team (
 );
 
 CREATE TABLE map.lineup (
-    id VARCHAR(255) PRIMARY KEY,
+    id INT PRIMARY KEY,
     map_id VARCHAR(255) NOT NULL,
     FOREIGN KEY (map_id) REFERENCES map.map(id),
     stuff_id VARCHAR(255) NOT NULL,
@@ -33,6 +33,12 @@ CREATE TABLE map.lineup (
     team_id VARCHAR(255) NOT NULL,
     FOREIGN KEY (team_id) REFERENCES map.team(id),
     video_link VARCHAR(255),
+    coords_x INT,
+    coords_y INT,
+    click_type VARCHAR(255),
+    position VARCHAR(255),
+    jump BOOLEAN,
+    movement VARCHAR(255),
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
