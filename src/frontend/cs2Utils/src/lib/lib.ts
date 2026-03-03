@@ -21,8 +21,8 @@ export interface Lineup {
   stuff_id: string;
   team_id: string;
   video_link: string;
-  coords_x: Number;
-  coords_y: Number;
+  coords_x: number;
+  coords_y: number;
   click_type: string;
   position: string;
   jump: boolean;

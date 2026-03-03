@@ -13,6 +13,8 @@ import { Lineup, Stuff } from '../../lib/lib';
 export class LineupDialogComponent {
   @Input() isOpen: boolean = false;
   @Input() stuffs: Stuff[] = [];
+  @Input() coords_x: number = 0;
+  @Input() coords_y: number = 0;
   @Output() cancelled = new EventEmitter<void>();
   @Output() created = new EventEmitter<Lineup>();
 
@@ -23,6 +25,9 @@ export class LineupDialogComponent {
   }
 
   handleCreate() {
+    console.log("mrge",this.coords_x, this.coords_y);
+    this.newLineup.coords_x = this.coords_x;
+    this.newLineup.coords_y = this.coords_y;
     this.created.emit(this.newLineup);
     this.newLineup = this.createNewLineup();
   }

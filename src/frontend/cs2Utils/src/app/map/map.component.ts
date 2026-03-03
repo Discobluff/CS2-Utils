@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Team, Stuff, Lineup } from '../../lib/lib';
 import { Router, RouterLink } from '@angular/router';
@@ -24,12 +24,25 @@ export class MapComponent {
 
   teams: Team[] = [];
   lineups: Lineup[] = [];
-  
+
+  widthImage: number = 0;
+  heightImage: number = 0;
+
+  getSizeLayout() {
+    const imageElement = document.getElementById('map-image') as HTMLImageElement;
+    if (imageElement) {
+      const rect = imageElement.getBoundingClientRect();
+      this.widthImage = rect.width;
+      this.heightImage = rect.height;
+    }
+    console.log(this.widthImage, this.heightImage);
+  }
+
   getTeams() {
     this.http.get<[]>(`${environment.apiUrl}/teams`).subscribe({
       next: (data) => {
         this.teams = data;
-        this.teams.push({id: "any", name: "Any", asset_name: "any"})
+        this.teams.push({ id: "any", name: "Any", asset_name: "any" })
       },
       error: (error) => {
         console.error('Error fetching teams:', error);
@@ -38,7 +51,7 @@ export class MapComponent {
   }
 
   getLineups() {
-      this.http.get<[]>(`${environment.apiUrl}/lineups`).subscribe({
+    this.http.get<[]>(`${environment.apiUrl}/lineups`).subscribe({
       next: (data) => {
         this.lineups = data;
       },
@@ -71,7 +84,6 @@ export class MapComponent {
       this.getTeams();
       this.getStuffs();
       this.getLineups();
-      console.log(this.lineups);
     });
   }
 
@@ -86,18 +98,32 @@ export class MapComponent {
   addNewLineup(newLineup: Lineup) {
     newLineup.map_id = this.mapSelected;
     newLineup.team_id = this.teamSelected;
-    newLineup.coords_x = 50;
-    newLineup.coords_y = 50;
     this.dialogOpen = false;
     this.http.post<[]>(`${environment.apiUrl}/lineups`, newLineup).subscribe({
-    next: (data) => {
-      this.getLineups();
-    },
-    error: (error) => {
-      console.error('Error creating lineup:', error);
-    }
-  });
+      next: (data) => {
+        this.getLineups();
+      },
+      error: (error) => {
+        console.error('Error creating lineup:', error);
+      }
+    });
+  }
+
+  getXLineup(lineup: Lineup): number {
+    return lineup.coords_x * this.widthImage-16;
+  }
+
+  getYLineup(lineup: Lineup): number {
+    return lineup.coords_y * this.heightImage -16;
+  }
+
+  getPixels(event: MouseEvent, img: HTMLImageElement): void {
+    const rect = img.getBoundingClientRect();
+    this.coords_x = (event.clientX - rect.left) / (rect.right - rect.left);
+    this.coords_y = (event.clientY - rect.top) / (rect.bottom - rect.top);
   }
 
   dialogOpen = false;
+  coords_x = 0;
+  coords_y = 0;
 }

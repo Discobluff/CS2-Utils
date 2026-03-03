@@ -1,6 +1,9 @@
 <app-dialog
+
   [isOpen]="dialogOpen"
   [stuffs]="stuffs"
+  [coords_x]="coords_x"
+  [coords_y]="coords_y"
   (cancelled)="dialogOpen = false"
   (created)="addNewLineup($event)"
 />
@@ -10,7 +13,7 @@
     Return to the maps list
 </button>
 <div class="flex-container">
-    <div class="col">
+    <div>
         <div class="list-selector">
             <h2 class="list-selector-title">Teams</h2>
             <div class="list">
@@ -32,8 +35,8 @@
             </div>
         </div>
     </div>
-    <div class="col stuff-container">
-        <img class="layout" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="dialogOpen = true">
-        <img class="stuff-icon" src="smoke_t.png" *ngFor="let lineup of lineups">
+    <div class="stuff-container">
+        <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="getPixels($event, $any($event.target));dialogOpen = true" (load)="getSizeLayout()">
+        <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineup(lineup)" [style.margin-top.px]="getYLineup(lineup)" src="assets/smoke_t.png" *ngFor="let lineup of lineups">
     </div>
 </div>

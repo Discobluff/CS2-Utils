@@ -38,13 +38,17 @@
     margin-left: 1rem;
 }
 
-.stuff-containr {
+.stuff-container {
     position: relative;
+    width:80vw;
+    height:80vh;
 }
 
 .layout {
-    width: 50%;
-    /* position: absolute; */
+    position: absolute;
+    max-width:100%;
+    height:auto;
+    max-height:100%;
 }
 
 .layout:hover {
@@ -52,5 +56,11 @@
 }
 
 .stuff-icon {
+    width: 2rem;
     position: absolute;
+}
+
+.stuff-icon:hover {
+    cursor: pointer;
+    transform: scale(1.25);
 }
