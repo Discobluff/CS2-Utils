@@ -37,6 +37,6 @@
     </div>
     <div class="stuff-container">
         <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="getPixels($event, $any($event.target));dialogOpen = true" (load)="getSizeLayout()">
-        <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineup(lineup)" [style.margin-top.px]="getYLineup(lineup)" src="assets/smoke_t.png" *ngFor="let lineup of lineups">
+        <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineup(lineup)" [style.margin-top.px]="getYLineup(lineup)" src="http://localhost:8080/assets?type=lineups&name={{lineup.stuff_id}}_{{lineup.team_id}}" *ngFor="let lineup of lineups">
     </div>
 </div>
