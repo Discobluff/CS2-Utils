@@ -2,6 +2,11 @@
 <div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
   <div class="dialog">
     <h2>Add lineup</h2>
+    <p>Team</p>
+      <select [(ngModel)]="newLineup.team_id">
+      <option value="t">T</option>
+      <option value="ct">CT</option>
+    </select>
     <p>Stuff type</p>
     <select [(ngModel)]="newLineup.stuff_id">
       <option *ngFor="let stuff of stuffs" [value]="stuff.id">{{stuff.name}}</option>

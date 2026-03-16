@@ -25,7 +25,6 @@ export class LineupDialogComponent {
   }
 
   handleCreate() {
-    console.log("mrge",this.coords_x, this.coords_y);
     this.newLineup.coords_x = this.coords_x;
     this.newLineup.coords_y = this.coords_y;
     this.created.emit(this.newLineup);

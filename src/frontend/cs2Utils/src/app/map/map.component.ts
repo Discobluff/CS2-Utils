@@ -35,7 +35,6 @@ export class MapComponent {
       this.widthImage = rect.width;
       this.heightImage = rect.height;
     }
-    console.log(this.widthImage, this.heightImage);
   }
 
   getTeams() {
@@ -97,7 +96,6 @@ export class MapComponent {
 
   addNewLineup(newLineup: Lineup) {
     newLineup.map_id = this.mapSelected;
-    newLineup.team_id = this.teamSelected;
     this.dialogOpen = false;
     this.http.post<[]>(`${environment.apiUrl}/lineups`, newLineup).subscribe({
       next: (data) => {
