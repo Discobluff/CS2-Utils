@@ -4,6 +4,8 @@ import com.cs2utils.entity.Lineup;
 import com.cs2utils.repository.LineupRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,6 +21,16 @@ public class LineupService {
 
     public List<Lineup> getAllLineups(){
         return lineupRepo.findAll();
+    }
+
+    public List<Lineup> getLineups(String map_id){//, String stuffId, String teamId) {
+        Specification<Lineup> spec = (root, query, cb) -> cb.conjunction();
+
+        if (map_id != null)   spec = spec.and((root, query, cb) -> cb.equal(root.get("map_id"), map_id));
+        // if (stuffId != null) spec = spec.and((root, query, cb) -> cb.equal(root.get("stuffId"), stuffId));
+        // if (teamId != null)  spec = spec.and((root, query, cb) -> cb.equal(root.get("teamId"), teamId));
+
+        return lineupRepo.findAll(spec);
     }
 
     public Lineup getLineupById(Integer id){

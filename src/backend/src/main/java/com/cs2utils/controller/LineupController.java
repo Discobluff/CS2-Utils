@@ -22,8 +22,11 @@ public class LineupController {
     private final LineupService lineupService;
 
     @GetMapping
-    public ResponseEntity<List<Lineup>> getAllLineups(){
-        return ResponseEntity.ok().body(lineupService.getAllLineups());
+    public ResponseEntity<List<Lineup>> getLineups(
+        @RequestParam(required = false) String map_id
+    ){
+        
+        return ResponseEntity.ok().body(lineupService.getLineups(map_id));
     }
 
     @GetMapping("/{id}")

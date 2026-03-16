@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Team, Stuff, Lineup } from '../../lib/lib';
@@ -12,7 +12,7 @@ import { environment } from '../../environements/environments';
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [NgFor, MatIconModule, MatButtonModule, RouterLink, LineupDialogComponent],
+  imports: [NgFor, NgIf, MatIconModule, MatButtonModule, RouterLink, LineupDialogComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
@@ -51,7 +51,7 @@ export class MapComponent {
   }
 
   getLineups() {
-    this.http.get<[]>(`${environment.apiUrl}/lineups`).subscribe({
+    this.http.get<[]>(`${environment.apiUrl}/lineups?map_id=${this.mapSelected}`).subscribe({
       next: (data) => {
         this.lineups = data;
       },
@@ -110,6 +110,7 @@ export class MapComponent {
   }
 
   getXLineup(lineup: Lineup): number {
+  this.getSizeLayout();
     return lineup.coords_x * this.widthImage-16;
   }
 
