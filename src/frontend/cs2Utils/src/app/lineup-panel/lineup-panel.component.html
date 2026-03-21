@@ -1,0 +1,22 @@
+@if (isPanelOpen) {
+<div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
+    <div class="dialog">
+        <h2>Lineup</h2>
+        <div class="button-toolbar">
+            <button class="btn btn-add" matFab extended>
+                <mat-icon>add</mat-icon>
+                Add
+            </button>
+            <button class="btn btn-edit" matFab extended>
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <button class="btn btn-delete" matFab extended>
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+}

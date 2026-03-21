@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Team, Stuff, Lineup } from '../../lib/lib';
 import { Router, RouterLink } from '@angular/router';
@@ -8,11 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { LineupDialogComponent } from '../lineup-dialog/lineup-dialog.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environements/environments';
+import { LineupPanelComponent } from '../lineup-panel/lineup-panel.component';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [NgFor, NgIf, MatIconModule, MatButtonModule, RouterLink, LineupDialogComponent],
+  imports: [NgFor, NgIf, MatIconModule, MatButtonModule, RouterLink, LineupDialogComponent, LineupPanelComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
@@ -123,6 +124,7 @@ export class MapComponent {
   }
 
   dialogOpen = false;
+  panelOpen = false;
   coords_x = 0;
   coords_y = 0;
 }
