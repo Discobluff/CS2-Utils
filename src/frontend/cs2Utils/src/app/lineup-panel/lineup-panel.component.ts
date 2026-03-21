@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
-
-
 @Component({
   selector: 'lineup-panel',
   standalone: true,
