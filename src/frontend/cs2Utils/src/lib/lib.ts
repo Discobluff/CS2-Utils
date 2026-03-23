@@ -17,6 +17,7 @@ export interface Stuff {
 }
 
 export interface Lineup {
+  id: number | undefined;
   map_id: string;
   stuff_id: string;
   team_id: string;

@@ -21,7 +21,7 @@ export class LineupDialogComponent {
   newLineup: Lineup = this.createNewLineup();
 
   createNewLineup(): Lineup {
-    return {map_id:'',  stuff_id: '', team_id: '', video_link: '', jump: false, coords_x_start: 0, coords_y_start: 0, click_type: 'left_click', position: 'stand', movement: 'stand', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0};
+    return {id: 0, map_id:'',  stuff_id: '', team_id: '', video_link: '', jump: false, coords_x_start: 0, coords_y_start: 0, click_type: 'left_click', position: 'stand', movement: 'stand', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0};
   }
 
   handleCreate() {

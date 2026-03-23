@@ -8,10 +8,11 @@
   (created)="addNewLineup($event)"
   />
   
-<lineup-panel
+  <lineup-panel
   [lineup]="panelLineup"
   [isPanelOpen]="panelOpen"
   (cancelled)="panelOpen = false"
+  (deleted)="panelOpen = false; deleteLineup(panelLineup)"
 />
 
 

@@ -18,11 +18,16 @@ export class LineupPanelComponent {
   @Input() isPanelOpen: boolean = false;
   @Input() lineup: Lineup | undefined;
   @Output() cancelled = new EventEmitter<void>();
+  @Output() deleted = new EventEmitter<void>();
   @Output() created = new EventEmitter<void>();
 
 constructor(private _sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
   iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
 }
+
+  handleDelete() {
+    this.deleted.emit();
+  }
 
   handleCreate() {
     this.created.emit();

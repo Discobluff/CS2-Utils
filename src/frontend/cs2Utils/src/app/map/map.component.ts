@@ -98,6 +98,7 @@ export class MapComponent {
   addNewLineup(newLineup: Lineup) {
     newLineup.map_id = this.mapSelected;
     this.dialogOpen = false;
+    newLineup.id = undefined;
     this.http.post<[]>(`${environment.apiUrl}/lineups`, newLineup).subscribe({
       next: (data) => {
         this.getLineups();
@@ -108,13 +109,26 @@ export class MapComponent {
     });
   }
 
+  deleteLineup(lineup: Lineup | undefined) {
+    if (lineup != undefined){
+      this.http.delete<[]>(`${environment.apiUrl}/lineups/${lineup.id}`).subscribe({
+        next: (data) => {
+          this.getLineups();
+        },
+        error: (error) => {
+          console.error('Error deleting lineup:', error);
+        }
+      });
+    }
+  }
+
   getXLineup(lineup: Lineup): number {
-  this.getSizeLayout();
-    return lineup.coords_x_start * this.widthImage-16;
+    this.getSizeLayout();
+    return lineup.coords_x_start * this.widthImage - 16;
   }
 
   getYLineup(lineup: Lineup): number {
-    return lineup.coords_y_start * this.heightImage -16;
+    return lineup.coords_y_start * this.heightImage - 16;
   }
 
   getPixels(event: MouseEvent, img: HTMLImageElement): void {
@@ -123,7 +137,7 @@ export class MapComponent {
     this.coords_y = (event.clientY - rect.top) / (rect.bottom - rect.top);
   }
 
-  setPanelLineup(lineup: Lineup){
+  setPanelLineup(lineup: Lineup) {
     this.panelLineup = lineup;
   }
 
