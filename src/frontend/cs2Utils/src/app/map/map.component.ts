@@ -110,11 +110,11 @@ export class MapComponent {
 
   getXLineup(lineup: Lineup): number {
   this.getSizeLayout();
-    return lineup.coords_x * this.widthImage-16;
+    return lineup.coords_x_start * this.widthImage-16;
   }
 
   getYLineup(lineup: Lineup): number {
-    return lineup.coords_y * this.heightImage -16;
+    return lineup.coords_y_start * this.heightImage -16;
   }
 
   getPixels(event: MouseEvent, img: HTMLImageElement): void {

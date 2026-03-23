@@ -36,7 +36,7 @@ constructor(private _sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
     if (event.target === event.currentTarget) this.handleCancel();
   }
 
-  getVideoURL(videoURL: string, start: Number, end: Number) {
+  getVideoURL(videoURL: string, start: Number | undefined, end: Number | undefined) {
     let embeddableURL = videoURL;
     if (videoURL.includes('youtube.com/watch?v=')) {
       const videoId = new URL(videoURL).searchParams.get('v');
@@ -46,8 +46,8 @@ constructor(private _sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
       embeddableURL = `https://www.youtube.com/embed/${videoId}`;
     }
     const params = new URLSearchParams();
-    if (start !== undefined) params.append('start', start.toString());
-    if (end !== undefined) params.append('end', end.toString());
+    if (start != undefined) params.append('start', start.toString());
+    if (end != undefined) params.append('end', end.toString());
     const urlWithParams = params.toString() ? `${embeddableURL}?${params.toString()}` : embeddableURL;
     let url = this._sanitizer.bypassSecurityTrustResourceUrl(urlWithParams);
     return url;

@@ -21,8 +21,12 @@ export interface Lineup {
   stuff_id: string;
   team_id: string;
   video_link: string;
-  coords_x: number;
-  coords_y: number;
+  video_start: Number | undefined;
+  video_end: Number | undefined;
+  coords_x_start: number;
+  coords_y_start: number;
+  coords_x_end: number;
+  coords_y_end: number;
   click_type: string;
   position: string;
   jump: boolean;

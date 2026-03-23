@@ -5,8 +5,9 @@
         <h2>Lineup</h2>
 
         @if (lineup != undefined) {
-        <iframe [src]='getVideoURL("https://www.youtube.com/watch?v=1ozGKlOzEVc", 60, 65)' allowfullscreen
+        <iframe [src]='getVideoURL(lineup.video_link, lineup.video_start, lineup.video_end)' allowfullscreen
             framborder="0"></iframe>
+        <br>
         <img class="lineup-icon" src="assets/{{lineup.click_type}}.png" width="50" height="50"
             [title]="lineup.click_type" />
         @if (lineup.jump) {

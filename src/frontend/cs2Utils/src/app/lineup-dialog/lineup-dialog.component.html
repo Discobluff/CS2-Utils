@@ -30,6 +30,12 @@
       <option value="shift">Shift</option>
       <option value="walk">Walk</option>
     </select>
+    <p>Video link</p>
+    <input placeholder="https://www.youtube.com/watch?v=..." [(ngModel)]="newLineup.video_link" />
+    <p>Time (s)</p>
+    <input class="input-time" placeholder="Start" type="number" [(ngModel)]="newLineup.video_start">
+    <span>:</span>
+    <input class="input-time" placeholder="End" type="number" [(ngModel)]="newLineup.video_end">
     <div class="dialog-actions">
       <button class="btn btn-cancel" (click)="handleCancel()">Cancel</button>
       <button class="btn btn-create" (click)="handleCreate()">Add</button>
