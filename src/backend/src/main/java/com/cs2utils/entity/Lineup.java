@@ -26,8 +26,12 @@ public class Lineup {
     private String stuff_id;
     private String team_id;
     private String video_link;
-    private Float coords_x;
-    private Float coords_y;
+    private Integer video_start;
+    private Integer video_end;
+    private Float coords_x_start;
+    private Float coords_y_start;
+    private Float coords_x_end;
+    private Float coords_y_end;
     private String click_type;
     private String position;
     private Boolean jump;
