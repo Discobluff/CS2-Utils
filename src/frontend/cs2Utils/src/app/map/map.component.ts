@@ -123,6 +123,11 @@ export class MapComponent {
     this.coords_y = (event.clientY - rect.top) / (rect.bottom - rect.top);
   }
 
+  setPanelLineup(lineup: Lineup){
+    this.panelLineup = lineup;
+  }
+
+  panelLineup: Lineup | undefined;
   dialogOpen = false;
   panelOpen = false;
   coords_x = 0;

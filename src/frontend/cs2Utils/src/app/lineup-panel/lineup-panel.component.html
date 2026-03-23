@@ -1,7 +1,22 @@
 @if (isPanelOpen) {
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
     <div class="dialog">
         <h2>Lineup</h2>
+
+        @if (lineup != undefined) {
+        <iframe [src]='getVideoURL("https://www.youtube.com/watch?v=1ozGKlOzEVc", 60, 65)' allowfullscreen
+            framborder="0"></iframe>
+        <img class="lineup-icon" src="assets/{{lineup.click_type}}.png" width="50" height="50"
+            [title]="lineup.click_type" />
+        @if (lineup.jump) {
+        <img class="lineup-icon" src="assets/jump.svg" width="50" height="50" title="jump" />
+        }
+        <img class="lineup-icon" src="assets/position_{{lineup.position}}.png" width="50" height="50"
+            [title]="lineup.position" />
+        <img class="lineup-icon" src="assets/movement_{{lineup.movement}}.png" height="50" [title]="lineup.movement" />
+        <p>{{lineup.click_type}} | @if (lineup.jump) {jump | } {{lineup.position}} | {{lineup.movement}}</p>
+        }
         <div class="button-toolbar">
             <button class="btn btn-add">
                 <mat-icon>add</mat-icon>
@@ -14,6 +29,10 @@
             <button class="btn btn-delete" matFab extended>
                 <mat-icon>delete</mat-icon>
                 Delete
+            </button>
+            <button class="btn btn-quit" matFab extended (click)="handleCancel()">
+                <mat-icon>logout</mat-icon>
+                Quit
             </button>
         </div>
     </div>
