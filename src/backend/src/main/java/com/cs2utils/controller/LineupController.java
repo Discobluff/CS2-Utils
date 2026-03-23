@@ -48,9 +48,9 @@ public class LineupController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteLineupById(@PathVariable Integer id)
+    public ResponseEntity<Void> deleteLineupById(@PathVariable Integer id)
     {
         lineupService.deleteLineupById(id);
-        return ResponseEntity.ok().body("Deleted lineup successfully");
+        return ResponseEntity.noContent().build();
     }
 }
