@@ -2,8 +2,7 @@
 
   [isOpen]="dialogOpen"
   [stuffs]="stuffs"
-  [coords_x]="coords_x"
-  [coords_y]="coords_y"
+  [newLineup]="dialogNewLineup"
   (cancelled)="dialogOpen = false"
   (created)="addNewLineup($event)"
   />
@@ -44,7 +43,7 @@
         </div>
     </div>
     <div class="stuff-container">
-        <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="getPixels($event, $any($event.target));dialogOpen = true">
+        <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="getPixels($event, $any($event.target));dialogNewLineup = createNewLineup(); dialogOpen = true">
         <ng-container *ngFor="let lineup of lineups">
         <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineup(lineup)" [style.margin-top.px]="getYLineup(lineup)" src="http://localhost:8080/assets?type=lineups&name={{lineup.stuff_id}}_{{lineup.team_id}}" *ngIf="lineup.team_id == teamSelected || teamSelected == 'any'" (click)="panelOpen=true; setPanelLineup(lineup)">
         </ng-container>

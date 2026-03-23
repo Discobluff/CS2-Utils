@@ -4,15 +4,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Lineup } from '../../lib/lib';
 import { MatIconRegistry } from '@angular/material/icon';
 
-
-
-
 @Component({
   selector: 'lineup-panel',
   standalone: true,
   imports: [MatIconModule],
   templateUrl: './lineup-panel.component.html',
-  styleUrl: './lineup-panel.component.css'
+  styleUrl: '../popup/popup.css'
 })
 export class LineupPanelComponent {
   @Input() isPanelOpen: boolean = false;

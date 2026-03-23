@@ -21,7 +21,7 @@ export class MapComponent {
 
   mapSelected: string = "";
   teamSelected: string = "";
-  stuffSelected: string | null = null;
+  stuffSelected: string = "";
 
   teams: Team[] = [];
   lineups: Lineup[] = [];
@@ -36,6 +36,10 @@ export class MapComponent {
       this.widthImage = rect.width;
       this.heightImage = rect.height;
     }
+  }
+
+  createNewLineup(): Lineup {
+    return {id: undefined, map_id:this.mapSelected,  stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: this.coords_x, coords_y_start: this.coords_y, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0};
   }
 
   getTeams() {
@@ -142,6 +146,7 @@ export class MapComponent {
   }
 
   panelLineup: Lineup | undefined;
+  dialogNewLineup: Lineup = this.createNewLineup();
   dialogOpen = false;
   panelOpen = false;
   coords_x = 0;

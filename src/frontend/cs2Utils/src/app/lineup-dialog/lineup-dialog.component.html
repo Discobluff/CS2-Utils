@@ -1,9 +1,11 @@
 @if (isOpen) {
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
   <div class="dialog">
     <h2>Add lineup</h2>
+    @if (newLineup != undefined) {
     <p>Team</p>
-      <select [(ngModel)]="newLineup.team_id">
+    <select [(ngModel)]="newLineup.team_id">
       <option value="t">T</option>
       <option value="ct">CT</option>
     </select>
@@ -13,12 +15,14 @@
     </select>
     <p>Click</p>
     <select [(ngModel)]="newLineup.click_type">
+      <option value=""></option>
       <option value="left_click">Left click</option>
       <option value="middle_click">Middle click</option>
       <option value="right_click">Right click</option>
     </select>
     <p>Position</p>
     <select [(ngModel)]="newLineup.position">
+      <option value=""></option>
       <option value="stand">Stand</option>
       <option value="crouch">Crouch</option>
     </select>
@@ -26,6 +30,7 @@
     <input type="checkbox" [(ngModel)]="newLineup.jump" />
     <p>Movement</p>
     <select [(ngModel)]="newLineup.movement">
+      <option value=""></option>
       <option value="stand">Stand</option>
       <option value="shift">Shift</option>
       <option value="walk">Walk</option>
@@ -36,9 +41,16 @@
     <input class="input-time" placeholder="Start" type="number" [(ngModel)]="newLineup.video_start">
     <span>:</span>
     <input class="input-time" placeholder="End" type="number" [(ngModel)]="newLineup.video_end">
-    <div class="dialog-actions">
-      <button class="btn btn-cancel" (click)="handleCancel()">Cancel</button>
-      <button class="btn btn-create" (click)="handleCreate()">Add</button>
+    }
+    <div class="button-toolbar">
+      <button class="btn btn-create" matFab extended (click)="handleCreate()">
+        <mat-icon>create</mat-icon>
+        Create
+      </button>
+      <button class="btn btn-quit" matFab extended (click)="handleCancel()">
+        <mat-icon>logout</mat-icon>
+        Quit
+      </button>
     </div>
   </div>
 </div>
