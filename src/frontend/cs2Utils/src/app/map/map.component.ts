@@ -152,6 +152,7 @@ export class MapComponent {
   handleClickOnLineupStart(lineup: Lineup) {
     this.panelOpen=true;
     this.setPanelLineup(lineup);
+    this.resetSelection();
   }
 
   handleSelectionCancel() {
