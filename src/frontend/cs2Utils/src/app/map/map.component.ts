@@ -43,7 +43,7 @@ export class MapComponent {
   }
 
   createNewLineup(): Lineup {
-    return {id: undefined, map_id:this.mapSelected,  stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: this.coords_x_start, coords_y_start: this.coords_y_start, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: this.coords_x_end, coords_y_end: this.coords_y_end};
+    return {id: undefined, map_id:this.mapSelected,  stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: 0, coords_y_start: 0, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0};
   }
 
   getTeams() {
@@ -179,21 +179,22 @@ export class MapComponent {
     this.resetSelection();
     let coords = this.getPixels(event, img);
     if (this.choosingStart) {
-      this.coords_x_start = coords[0];
-      this.coords_y_start = coords[1];
-      this.dialogNewLineup = this.createNewLineup(); // TODO : refactor remove x,y coords and remember lineup
+      this.dialogNewLineup.coords_x_start = coords[0];
+      this.dialogNewLineup.coords_y_start = coords[1];
       this.dialogOpen = true
       this.choosingStart = false;
     } else {
-      this.coords_x_end = coords[0];
-      this.coords_y_end = coords[1];
+      this.dialogNewLineup = this.createNewLineup(); // TODO : refactor remove x,y coords and remember lineup
+      this.dialogNewLineup.coords_x_end = coords[0];
+      this.dialogNewLineup.coords_y_end = coords[1];
       this.choosingStart = true
     }
   }
 
   addLineupToCurrent(lineup: Lineup) {
-    this.coords_x_end = lineup.coords_x_end;
-    this.coords_y_end = lineup.coords_y_end;
+    this.dialogNewLineup = this.createNewLineup();
+    this.dialogNewLineup.coords_x_end = lineup.coords_x_end;
+    this.dialogNewLineup.coords_y_end = lineup.coords_y_end;
     this.choosingStart = true;
     this.resetSelection();
     this.panelOpen = false;
@@ -214,8 +215,4 @@ export class MapComponent {
   dialogNewLineup: Lineup = this.createNewLineup();
   dialogOpen = false;
   panelOpen = false;
-  coords_x_end = 0;
-  coords_y_end = 0;
-  coords_x_start = 0;
-  coords_y_start = 0;
 }
