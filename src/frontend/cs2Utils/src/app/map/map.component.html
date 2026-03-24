@@ -47,6 +47,12 @@
             </ng-container>
             <ng-container *ngIf="xLineupSelected != -1 && yLineupSelected != -1">
                 <ng-container *ngFor="let lineup of lineups">
+                    <svg class="line"
+                        *ngIf="lineup.coords_x_end == xLineupSelected && lineup.coords_y_end == yLineupSelected">
+                        <line [attr.x1]="getXLineupStart(lineup)+16" [attr.y1]="getYLineupStart(lineup)+16"
+                            [attr.x2]="getXLineupEnd(lineup)+16" [attr.y2]="getYLineupEnd(lineup)+16"
+                            [attr.stroke]="getColor(lineup.team_id)" stroke-width="2" stroke-dasharray="8,4" />
+                    </svg>
                     <div class="circle"
                         *ngIf="lineup.coords_x_end == xLineupSelected && lineup.coords_y_end == yLineupSelected"
                         [style.margin-left.px]="getXLineupStart(lineup)" [style.margin-top.px]="getYLineupStart(lineup)"
