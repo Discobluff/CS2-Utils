@@ -39,14 +39,7 @@
             <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}"
                 (click)="handleClickOnMap($event, $any($event.target))">
             <ng-container *ngFor="let lineup of lineups">
-                <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineupEnd(lineup)"
-                    [style.margin-top.px]="getYLineupEnd(lineup)"
-                    src="http://localhost:8080/assets?type=lineups&name={{lineup.stuff_id}}_{{lineup.team_id}}"
-                    *ngIf="lineup.team_id == teamSelected || teamSelected == 'any'"
-                    (click)="handleClickOnLineup(lineup)">
-            </ng-container>
-            <ng-container *ngIf="xLineupSelected != -1 && yLineupSelected != -1">
-                <ng-container *ngFor="let lineup of lineups">
+                <ng-container *ngIf="xLineupSelected != -1 && yLineupSelected != -1">
                     <svg class="line"
                         *ngIf="lineup.coords_x_end == xLineupSelected && lineup.coords_y_end == yLineupSelected">
                         <line [attr.x1]="getXLineupStart(lineup)+16" [attr.y1]="getYLineupStart(lineup)+16"
@@ -59,6 +52,11 @@
                         [style.background-color]="getColor(lineup.team_id)" (click)="handleClickOnLineupStart(lineup)">
                     </div>
                 </ng-container>
+                <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineupEnd(lineup)"
+                    [style.margin-top.px]="getYLineupEnd(lineup)"
+                    src="http://localhost:8080/assets?type=lineups&name={{lineup.stuff_id}}_{{lineup.team_id}}"
+                    *ngIf="lineup.team_id == teamSelected || teamSelected == 'any'"
+                    (click)="handleClickOnLineup(lineup)">
             </ng-container>
         </div>
         <div>
