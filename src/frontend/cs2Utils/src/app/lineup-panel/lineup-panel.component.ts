@@ -16,7 +16,8 @@ export class LineupPanelComponent {
   @Input() lineup: Lineup | undefined;
   @Output() cancelled = new EventEmitter<void>();
   @Output() deleted = new EventEmitter<void>();
-  @Output() created = new EventEmitter<void>();
+  @Output() added =  new EventEmitter<Lineup>();
+  @Output() edited =  new EventEmitter<Lineup>();
 
 constructor(private _sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
   iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
@@ -26,8 +27,8 @@ constructor(private _sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
     this.deleted.emit();
   }
 
-  handleCreate() {
-    this.created.emit();
+  handleAdd() {
+    this.added.emit(this.lineup);
   }
 
   handleCancel() {

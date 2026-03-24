@@ -2,7 +2,7 @@
     (created)="addNewLineup($event)" />
 
 <lineup-panel [lineup]="panelLineup" [isPanelOpen]="panelOpen" (cancelled)="panelOpen = false"
-    (deleted)="panelOpen = false; deleteLineup(panelLineup)" />
+    (deleted)="panelOpen = false; deleteLineup(panelLineup)" (added)="addLineupToCurrent($event)" />
 
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <button mat-button routerLink="/maps">
@@ -50,14 +50,14 @@
                     <div class="circle"
                         *ngIf="lineup.coords_x_end == xLineupSelected && lineup.coords_y_end == yLineupSelected"
                         [style.margin-left.px]="getXLineupStart(lineup)" [style.margin-top.px]="getYLineupStart(lineup)"
-                        [style.background-color]="getColor()" (click)="handleClickOnLineupStart(lineup)">
+                        [style.background-color]="getColor(lineup.team_id)" (click)="handleClickOnLineupStart(lineup)">
                     </div>
                 </ng-container>
             </ng-container>
         </div>
         <div>
-            <h1 class="select-start" *ngIf="choosingStart">Select the start of the lineup</h1>
-            <h1 class="select-start" *ngIf="xLineupSelected != -1">Select the start of the lineup</h1>
+            <h1 class="select-start" *ngIf="choosingStart">Choose the start of the new lineup</h1>
+            <h1 class="select-start" *ngIf="xLineupSelected != -1">Select the lineup</h1>
             <button *ngIf="choosingStart || xLineupSelected != -1" class="btn btn-cancel" matFab extended
                 (click)="handleSelectionCancel()">
                 <mat-icon>cancel</mat-icon>

@@ -19,7 +19,7 @@
         <p>{{lineup.click_type}} | @if (lineup.jump) {jump | } {{lineup.position}} | {{lineup.movement}}</p>
         }
         <div class="button-toolbar">
-            <button class="btn btn-add">
+            <button class="btn btn-add" (click)="handleAdd()">
                 <mat-icon>add</mat-icon>
                 <span>Add</span>
             </button>

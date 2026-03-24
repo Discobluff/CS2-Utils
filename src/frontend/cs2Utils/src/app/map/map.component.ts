@@ -156,22 +156,27 @@ export class MapComponent {
 
   handleSelectionCancel() {
     this.choosingStart = false;
-    this.xLineupSelected = -1;
-    this.yLineupSelected = -1;
+    this.resetSelection();
   }
 
-  getColor(): string {
-    if (this.teamSelected == "t") return "#F0B100";
-    if (this.teamSelected == "ct") return "#2B7FFF";
-    return "gray";
+  getColor(team: string): string {
+    if (team == "t") return "#F0B100";
+    return "#2B7FFF";
   }
 
   handleClickOnLineup(lineup: Lineup): void {
+    this.handleSelectionCancel();
     this.xLineupSelected = lineup.coords_x_end;
     this.yLineupSelected = lineup.coords_y_end
   }
 
+  resetSelection(): void {
+    this.xLineupSelected = -1;
+    this.yLineupSelected = -1;
+  }
+
   handleClickOnMap(event: MouseEvent, img: HTMLImageElement): void {
+    this.resetSelection();
     let coords = this.getPixels(event, img);
     if (this.choosingStart) {
       this.coords_x_start = coords[0];
@@ -184,6 +189,14 @@ export class MapComponent {
       this.coords_y_end = coords[1];
       this.choosingStart = true
     }
+  }
+
+  addLineupToCurrent(lineup: Lineup) {
+    this.coords_x_end = lineup.coords_x_end;
+    this.coords_y_end = lineup.coords_y_end;
+    this.choosingStart = true;
+    this.resetSelection();
+    this.panelOpen = false;
   }
 
   getPixels(event: MouseEvent, img: HTMLImageElement): [number, number] {
