@@ -29,6 +29,10 @@ export class MapComponent {
   widthImage: number = 0;
   heightImage: number = 0;
 
+  choosingStart: boolean = false;
+  xLineupSelected: number = -1;
+  yLineupSelected: number = -1;
+
   getSizeLayout() {
     const imageElement = document.getElementById('map-image') as HTMLImageElement;
     if (imageElement) {
@@ -39,7 +43,7 @@ export class MapComponent {
   }
 
   createNewLineup(): Lineup {
-    return {id: undefined, map_id:this.mapSelected,  stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: this.coords_x, coords_y_start: this.coords_y, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0};
+    return {id: undefined, map_id:this.mapSelected,  stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: this.coords_x_start, coords_y_start: this.coords_y_start, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: this.coords_x_end, coords_y_end: this.coords_y_end};
   }
 
   getTeams() {
@@ -58,6 +62,7 @@ export class MapComponent {
     this.http.get<[]>(`${environment.apiUrl}/lineups?map_id=${this.mapSelected}`).subscribe({
       next: (data) => {
         this.lineups = data;
+        console.log(this.lineups);
       },
       error: (error) => {
         console.error('Error fetching lineups:', error);
@@ -126,19 +131,66 @@ export class MapComponent {
     }
   }
 
-  getXLineup(lineup: Lineup): number {
+  getXLineupStart(lineup: Lineup): number {
     this.getSizeLayout();
     return lineup.coords_x_start * this.widthImage - 16;
   }
 
-  getYLineup(lineup: Lineup): number {
+  getYLineupStart(lineup: Lineup): number {
     return lineup.coords_y_start * this.heightImage - 16;
   }
 
-  getPixels(event: MouseEvent, img: HTMLImageElement): void {
+  getXLineupEnd(lineup: Lineup): number {
+    this.getSizeLayout();
+    return lineup.coords_x_end * this.widthImage - 16;
+  }
+
+  getYLineupEnd(lineup: Lineup): number {
+    return lineup.coords_y_end * this.heightImage - 16;
+  }
+
+  handleClickOnLineupStart(lineup: Lineup) {
+    this.panelOpen=true;
+    this.setPanelLineup(lineup);
+  }
+
+  handleSelectionCancel() {
+    this.choosingStart = false;
+    this.xLineupSelected = -1;
+    this.yLineupSelected = -1;
+  }
+
+  getColor(): string {
+    if (this.teamSelected == "t") return "#F0B100";
+    if (this.teamSelected == "ct") return "#2B7FFF";
+    return "gray";
+  }
+
+  handleClickOnLineup(lineup: Lineup): void {
+    this.xLineupSelected = lineup.coords_x_end;
+    this.yLineupSelected = lineup.coords_y_end
+  }
+
+  handleClickOnMap(event: MouseEvent, img: HTMLImageElement): void {
+    let coords = this.getPixels(event, img);
+    if (this.choosingStart) {
+      this.coords_x_start = coords[0];
+      this.coords_y_start = coords[1];
+      this.dialogNewLineup = this.createNewLineup(); // TODO : refactor remove x,y coords and remember lineup
+      this.dialogOpen = true
+      this.choosingStart = false;
+    } else {
+      this.coords_x_end = coords[0];
+      this.coords_y_end = coords[1];
+      this.choosingStart = true
+    }
+  }
+
+  getPixels(event: MouseEvent, img: HTMLImageElement): [number, number] {
     const rect = img.getBoundingClientRect();
-    this.coords_x = (event.clientX - rect.left) / (rect.right - rect.left);
-    this.coords_y = (event.clientY - rect.top) / (rect.bottom - rect.top);
+    let x = (event.clientX - rect.left) / (rect.right - rect.left);
+    let y = (event.clientY - rect.top) / (rect.bottom - rect.top);
+    return [x, y];
   }
 
   setPanelLineup(lineup: Lineup) {
@@ -149,6 +201,8 @@ export class MapComponent {
   dialogNewLineup: Lineup = this.createNewLineup();
   dialogOpen = false;
   panelOpen = false;
-  coords_x = 0;
-  coords_y = 0;
+  coords_x_end = 0;
+  coords_y_end = 0;
+  coords_x_start = 0;
+  coords_y_start = 0;
 }

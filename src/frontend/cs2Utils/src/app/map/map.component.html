@@ -1,18 +1,8 @@
-<app-dialog
+<app-dialog [isOpen]="dialogOpen" [stuffs]="stuffs" [newLineup]="dialogNewLineup" (cancelled)="dialogOpen = false"
+    (created)="addNewLineup($event)" />
 
-  [isOpen]="dialogOpen"
-  [stuffs]="stuffs"
-  [newLineup]="dialogNewLineup"
-  (cancelled)="dialogOpen = false"
-  (created)="addNewLineup($event)"
-  />
-  
-  <lineup-panel
-  [lineup]="panelLineup"
-  [isPanelOpen]="panelOpen"
-  (cancelled)="panelOpen = false"
-  (deleted)="panelOpen = false; deleteLineup(panelLineup)"
-/>
+<lineup-panel [lineup]="panelLineup" [isPanelOpen]="panelOpen" (cancelled)="panelOpen = false"
+    (deleted)="panelOpen = false; deleteLineup(panelLineup)" />
 
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <button mat-button routerLink="/maps">
@@ -26,7 +16,8 @@
             <div class="list">
                 <div class="list-element" *ngFor="let team of teams" [id]="team.id"
                     [class.list-element-selected]="team.id === teamSelected" (click)="pickTeam(team.id)">
-                    <img src="http://localhost:8080/assets?type=teams&name={{team.asset_name}}" alt="Team icon" class="list-element-icon">
+                    <img src="http://localhost:8080/assets?type=teams&name={{team.asset_name}}" alt="Team icon"
+                        class="list-element-icon">
                     <p class="list-element-text">{{team.name}}</p>
                 </div>
             </div>
@@ -36,16 +27,42 @@
             <div class="list">
                 <div class="list-element" *ngFor="let stuff of stuffs" [id]="stuff.id"
                     [class.list-element-selected]="stuff.id === stuffSelected" (click)="pickStuff(stuff.id)">
-                    <img src="http://localhost:8080/assets?type=stuffs&name={{stuff.asset_name}}" alt="Stuff icon" class="list-element-icon">
+                    <img src="http://localhost:8080/assets?type=stuffs&name={{stuff.asset_name}}" alt="Stuff icon"
+                        class="list-element-icon">
                     <p class="list-element-text">{{stuff.name}}</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="stuff-container">
-        <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}" (click)="getPixels($event, $any($event.target));dialogNewLineup = createNewLineup(); dialogOpen = true">
-        <ng-container *ngFor="let lineup of lineups">
-        <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineup(lineup)" [style.margin-top.px]="getYLineup(lineup)" src="http://localhost:8080/assets?type=lineups&name={{lineup.stuff_id}}_{{lineup.team_id}}" *ngIf="lineup.team_id == teamSelected || teamSelected == 'any'" (click)="panelOpen=true; setPanelLineup(lineup)">
-        </ng-container>
+    <div class="map-info">
+        <div class="stuff-container">
+            <img class="layout" id="map-image" src="http://localhost:8080/assets?type=callouts&name={{mapSelected}}"
+                (click)="handleClickOnMap($event, $any($event.target))">
+            <ng-container *ngFor="let lineup of lineups">
+                <img id="stuff-image" class="stuff-icon" [style.margin-left.px]="getXLineupEnd(lineup)"
+                    [style.margin-top.px]="getYLineupEnd(lineup)"
+                    src="http://localhost:8080/assets?type=lineups&name={{lineup.stuff_id}}_{{lineup.team_id}}"
+                    *ngIf="lineup.team_id == teamSelected || teamSelected == 'any'"
+                    (click)="handleClickOnLineup(lineup)">
+            </ng-container>
+            <ng-container *ngIf="xLineupSelected != -1 && yLineupSelected != -1">
+                <ng-container *ngFor="let lineup of lineups">
+                    <div class="circle"
+                        *ngIf="lineup.coords_x_end == xLineupSelected && lineup.coords_y_end == yLineupSelected"
+                        [style.margin-left.px]="getXLineupStart(lineup)" [style.margin-top.px]="getYLineupStart(lineup)"
+                        [style.background-color]="getColor()" (click)="handleClickOnLineupStart(lineup)">
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div>
+            <h1 class="select-start" *ngIf="choosingStart">Select the start of the lineup</h1>
+            <h1 class="select-start" *ngIf="xLineupSelected != -1">Select the start of the lineup</h1>
+            <button *ngIf="choosingStart || xLineupSelected != -1" class="btn btn-cancel" matFab extended
+                (click)="handleSelectionCancel()">
+                <mat-icon>cancel</mat-icon>
+                Cancel
+            </button>
+        </div>
     </div>
 </div>

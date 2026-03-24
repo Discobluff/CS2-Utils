@@ -64,3 +64,25 @@
     cursor: pointer;
     transform: scale(1.25);
 }
+
+.map-info {
+    display: block;
+}
+
+.select-start {
+    margin-top: 8px;
+}
+
+.circle {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.circle:hover {
+    cursor: pointer;
+    transform: scale(1.25);
+}
+
+.btn-cancel { background: #393636; color: white; }
