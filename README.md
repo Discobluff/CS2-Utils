@@ -9,3 +9,5 @@ docker rm -f cs2-utils-postgres
 sudo systemctl stop postgresql
 docker exec -it cs2-utils-postgres psql -U postgres -W
 \c map
+
+docker exec -it cs2-utils-db-1 psql -U postgres
