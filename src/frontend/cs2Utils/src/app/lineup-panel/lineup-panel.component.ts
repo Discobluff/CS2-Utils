@@ -31,6 +31,10 @@ constructor(private _sanitizer: DomSanitizer, iconRegistry: MatIconRegistry) {
     this.added.emit(this.lineup);
   }
 
+  handleEdit() {
+    this.edited.emit(this.lineup);
+  }
+
   handleCancel() {
     this.cancelled.emit();
   }

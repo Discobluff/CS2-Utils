@@ -1,8 +1,8 @@
-<app-dialog [isOpen]="dialogOpen" [stuffs]="stuffs" [newLineup]="dialogNewLineup" (cancelled)="dialogOpen = false"
-    (created)="addNewLineup($event)" />
+<app-dialog [isOpen]="dialogOpen" [stuffs]="stuffs" [newLineup]="dialogNewLineup" [edition]="edition" (cancelled)="dialogOpen = false; edition = false"
+    (created)="addNewLineup($event)" (edited)="editLineup($event)" />
 
 <lineup-panel [lineup]="panelLineup" [isPanelOpen]="panelOpen" (cancelled)="panelOpen = false"
-    (deleted)="panelOpen = false; deleteLineup(panelLineup)" (added)="addLineupToCurrent($event)" />
+    (edited)="startEdition($event)" (deleted)="panelOpen = false; deleteLineup(panelLineup)" (added)="addLineupToCurrent($event)" />
 
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 <button mat-button routerLink="/maps">

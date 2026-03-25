@@ -33,6 +33,8 @@ export class MapComponent {
   xLineupSelected: number = -1;
   yLineupSelected: number = -1;
 
+  edition: boolean = false;
+
   getSizeLayout() {
     const imageElement = document.getElementById('map-image') as HTMLImageElement;
     if (imageElement) {
@@ -105,10 +107,22 @@ export class MapComponent {
   }
 
   addNewLineup(newLineup: Lineup) {
-    newLineup.map_id = this.mapSelected;
     this.dialogOpen = false;
     newLineup.id = undefined;
     this.http.post<[]>(`${environment.apiUrl}/lineups`, newLineup).subscribe({
+      next: (data) => {
+        this.getLineups();
+      },
+      error: (error) => {
+        console.error('Error creating lineup:', error);
+      }
+    });
+  }
+
+  editLineup(lineup: Lineup) {
+    this.dialogOpen = false;
+    this.edition = false;
+    this.http.put<[]>(`${environment.apiUrl}/lineups`, lineup).subscribe({
       next: (data) => {
         this.getLineups();
       },
@@ -129,6 +143,16 @@ export class MapComponent {
         }
       });
     }
+  }
+
+  startEdition(lineup: Lineup) {
+    if (lineup != undefined) {
+    }
+    this.dialogNewLineup = lineup;
+    this.edition = true;
+    this.dialogOpen = true;
+    this.resetSelection();
+    this.panelOpen = false;
   }
 
   getXLineupStart(lineup: Lineup): number {

@@ -43,9 +43,13 @@
     <input class="input-time" placeholder="End" type="number" [(ngModel)]="newLineup.video_end">
     }
     <div class="button-toolbar">
-      <button class="btn btn-create" matFab extended (click)="handleCreate()">
+      <button *ngIf="!edition" class="btn btn-create" matFab extended (click)="handleCreate()">
         <mat-icon>create</mat-icon>
         Create
+      </button>
+      <button *ngIf="edition" class="btn btn-edit" matFab extended (click)="handleEdit()">
+        <mat-icon>edit</mat-icon>
+        Edit
       </button>
       <button class="btn btn-quit" matFab extended (click)="handleCancel()">
         <mat-icon>logout</mat-icon>

@@ -15,11 +15,21 @@ export class LineupDialogComponent {
   @Input() isOpen: boolean = false;
   @Input() stuffs: Stuff[] = [];
   @Input() newLineup: Lineup | undefined;
+  @Input() edition: boolean = false;
   @Output() cancelled = new EventEmitter<void>();
   @Output() created = new EventEmitter<Lineup>();
+  @Output() edited = new EventEmitter<Lineup>();
 
   constructor(iconRegistry: MatIconRegistry) {
     iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+  }
+
+  handleEdit() {
+    if (this.newLineup != undefined){
+      this.edited.emit(this.newLineup);
+    } else {
+      this.cancelled.emit();
+    }
   }
 
   handleCreate() {
