@@ -22,29 +22,4 @@ public class StuffController {
     public ResponseEntity<List<Stuff>> getAllStuffs(){
         return ResponseEntity.ok().body(stuffService.getAllStuffs());
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Stuff> getStuffById(@PathVariable String id)
-    {
-        return ResponseEntity.ok().body(stuffService.getStuffById(id));
-    }
-
-    @PostMapping
-    public ResponseEntity<Stuff> saveStuff(@RequestBody Stuff stuff)
-    {
-        return ResponseEntity.ok().body(stuffService.saveStuff(stuff));
-    }
-
-    @PutMapping
-    public ResponseEntity<Stuff> updateStuff(@RequestBody Stuff stuff)
-    {
-        return ResponseEntity.ok().body(stuffService.updateStuff(stuff));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteStuffById(@PathVariable String id)
-    {
-        stuffService.deleteStuffById(id);
-        return ResponseEntity.ok().body("Deleted stuff successfully");
-    }
 }

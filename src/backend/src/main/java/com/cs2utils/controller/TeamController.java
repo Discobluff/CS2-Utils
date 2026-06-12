@@ -22,29 +22,4 @@ public class TeamController {
     public ResponseEntity<List<Team>> getAllTeams(){
         return ResponseEntity.ok().body(teamService.getAllTeams());
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Team> getTeamById(@PathVariable String id)
-    {
-        return ResponseEntity.ok().body(teamService.getTeamById(id));
-    }
-
-    @PostMapping
-    public ResponseEntity<Team> saveTeam(@RequestBody Team team)
-    {
-        return ResponseEntity.ok().body(teamService.saveTeam(team));
-    }
-
-    @PutMapping
-    public ResponseEntity<Team> updateTeam(@RequestBody Team team)
-    {
-        return ResponseEntity.ok().body(teamService.updateTeam(team));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTeamById(@PathVariable String id)
-    {
-        teamService.deleteTeamById(id);
-        return ResponseEntity.ok().body("Deleted team successfully");
-    }
 }
