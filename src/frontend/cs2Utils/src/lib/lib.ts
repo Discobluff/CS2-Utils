@@ -4,6 +4,12 @@ export interface MapInfo {
   asset_name: string;
 }
 
+export interface NewMap {
+  name: string;
+  asset_name: string;
+  asset: File;
+}
+
 export interface Team {
   name: string;
   id: string;

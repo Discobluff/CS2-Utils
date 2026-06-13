@@ -1,0 +1,24 @@
+@if (isOpen) {
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+<div class="dialog-overlay" (click)="onBackdropClick($event)" (keydown.escape)="handleCancel()">
+    <div class="dialog">
+        <h2>Add a new map</h2>
+        <p>Map name</p>
+        <input placeholder="Map name" [(ngModel)]="newMap.name" />
+        <p>Image name</p>
+        <input placeholder="Map name" [(ngModel)]="newMap.asset_name" />
+        <p>Map image</p>
+        <input type="file" accept="image/png" (change)="onFileChange($event)" />
+        <div class="button-toolbar">
+            <button class="btn btn-add" matFab extended (click)="handleCreate()">
+                <mat-icon>add</mat-icon>
+                Add
+            </button>
+            <button class="btn btn-cancel" matFab extended (click)="handleCancel()">
+                <mat-icon>cancel</mat-icon>
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+}

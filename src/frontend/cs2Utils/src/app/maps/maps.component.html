@@ -1,7 +1,13 @@
+<app-new-map-dialog [isOpen]="newMapDialogOpen" (cancelled)="newMapDialogOpen = false" (created)="addNewMap($event)" />
+
 <h1><b>Select a map</b></h1>
 <div class="maps">
     <div class="map_card" *ngFor="let map of maps" [id]="map.id" (click)="goToMap(map.id)">
         <img class="map_image" src="http://localhost:8080/assets?type=maps&name={{map.id}}" alt="Missing image for this map">
         <p class="map_name">{{map.name}}</p>
+    </div>
+    <div class="map_card" (click)="newMapDialogOpen = true">
+        <img class="map_image" src="https://icons.veryicon.com/png/o/miscellaneous/o2o-middle-school-project/plus-104.png" alt="Missing image for this map">
+        <p class="add_map">Add a new map</p>
     </div>
 </div>

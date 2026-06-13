@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import com.cs2utils.dto.request.MapRequest;
 
 import java.util.List;
 
@@ -30,9 +31,9 @@ public class MapController {
     }
 
     @PostMapping
-    public ResponseEntity<Map> saveMap(@RequestBody Map map)
+    public ResponseEntity<Map> saveMap(@ModelAttribute MapRequest mapRequest)
     {
-        return ResponseEntity.ok().body(mapService.saveMap(map));
+        return ResponseEntity.ok().body(mapService.saveMap(mapRequest));
     }
 
     @PutMapping
