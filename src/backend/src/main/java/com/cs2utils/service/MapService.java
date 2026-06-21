@@ -74,6 +74,26 @@ public class MapService {
         return updatedMap;
     }
 
+    public void saveCallout(String id, MultipartFile file) {
+        Optional<Map> optionalMap = mapRepo.findById(id);
+        if (optionalMap.isPresent()) {
+            Map map = optionalMap.get();
+            String calloutFileName = map.getAssetName() + ".png";
+            try {
+                Path calloutsDir = Paths.get("src/main/assets/callouts");
+                Files.createDirectories(calloutsDir);
+                Path calloutFile = calloutsDir.resolve(calloutFileName);
+                Files.write(calloutFile, file.getBytes());
+                log.info("Callout saved to {}", calloutFile.toAbsolutePath());
+                map.setUpdatedAt(LocalDateTime.now());
+            } catch (IOException e) {
+                log.error("Failed to save callout for map {}: {}", id, e.getMessage());
+            }
+        } else {
+            log.info("Map with id: {} doesn't exist", id);
+        }
+    }
+
     public void deleteMapById (String id) {
         mapRepo.deleteById(id);
     }

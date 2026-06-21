@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.cs2utils.dto.request.MapRequest;
 
 import java.util.List;
@@ -34,6 +36,13 @@ public class MapController {
     public ResponseEntity<Map> saveMap(@ModelAttribute MapRequest mapRequest)
     {
         return ResponseEntity.ok().body(mapService.saveMap(mapRequest));
+    }
+
+    @PostMapping("/{id}/callouts")
+    public ResponseEntity<String> saveCallout(@PathVariable String id, @RequestParam("file") MultipartFile file)
+    {
+        mapService.saveCallout(id, file);
+        return ResponseEntity.ok().body("Callout saved successfully");
     }
 
     @PutMapping

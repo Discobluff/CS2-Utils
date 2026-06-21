@@ -45,7 +45,7 @@ export class MapComponent {
   }
 
   createNewLineup(): Lineup {
-    return {id: undefined, map_id:this.mapSelected,  stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: 0, coords_y_start: 0, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0};
+    return { id: undefined, map_id: this.mapSelected, stuff_id: this.stuffSelected, team_id: this.teamSelected, video_link: '', jump: false, coords_x_start: 0, coords_y_start: 0, click_type: '', position: '', movement: '', video_start: undefined, video_end: undefined, coords_x_end: 0, coords_y_end: 0 };
   }
 
   getTeams() {
@@ -133,7 +133,7 @@ export class MapComponent {
   }
 
   deleteLineup(lineup: Lineup | undefined) {
-    if (lineup != undefined){
+    if (lineup != undefined) {
       this.http.delete<[]>(`${environment.apiUrl}/lineups/${lineup.id}`).subscribe({
         next: (data) => {
           this.getLineups();
@@ -143,6 +143,30 @@ export class MapComponent {
         }
       });
     }
+  }
+
+  handleCalloutUpload() {
+    const inputElement = document.getElementById('callout-input') as HTMLInputElement;
+    if (inputElement && inputElement.files && inputElement.files.length > 0) {
+      const file = inputElement.files[0];
+      this.editCallout(file);
+    }
+  }
+
+  editCallout(callout: File) {
+    const formData = new FormData();
+    formData.append('file', callout, callout.name);
+
+    this.http.post(`${environment.apiUrl}/maps/${this.mapSelected}/callouts`, formData).subscribe({
+      next: (data) => {
+        console.log('callout edited');
+        window.location.reload();
+      },
+      error: (error) => {
+        console.error('Error editing callout:', error);
+        window.location.reload();
+      }
+    });
   }
 
   startEdition(lineup: Lineup) {
@@ -174,7 +198,7 @@ export class MapComponent {
   }
 
   handleClickOnLineupStart(lineup: Lineup) {
-    this.panelOpen=true;
+    this.panelOpen = true;
     this.setPanelLineup(lineup);
     this.resetSelection();
   }
