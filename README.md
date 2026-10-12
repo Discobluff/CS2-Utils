@@ -1,13 +1,30 @@
 # CS2-Utils
-A web-based tool for CS2 which presents interactive maps and allow to save Youtube videos for utilities
+
+A web-based tool for the video game CS2 which presents interactive maps and allow to save Youtube videos for utilities. You can add the different maps, and add lineups by selecting the type (smoke, flash, ...), the side (T, CT), the positions on the map, and the basic informations (stand, jump, ...) and also a link towards a youtube video to explain the lineup
+
+## Run
+
+`docker compose up`
 
 
-## DB Postgres
+## Presentation
 
-docker run --name cs2-utils-postgres -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=map -p 5432:5432 -d postgres
-docker rm -f cs2-utils-postgres
-sudo systemctl stop postgresql
-docker exec -it cs2-utils-postgres psql -U postgres -W
-\c map
+**Create a new map**
 
-docker exec -it cs2-utils-db-1 psql -U postgres
+![New map](./images/new_map.png)
+
+**Select a map**
+
+![Select map](./images/select_map.png)
+
+**Create a new linup**
+
+![Create lineup](./images/new_lineup.png)
+
+**Select a lineup**
+
+![Select lineup](./images/select_lineup.png)
+
+**Visualize a lineup**
+
+![Visualize lineup](./images/lineup.png)
